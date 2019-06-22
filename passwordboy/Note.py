@@ -1,13 +1,22 @@
-class SecurityQ:
-    text = ""
+class Note:
+
+    def __init__(self, accountId, text):
+        self._accountId = accountId
+        self._text = text
     
-    def __init__(self, text):
-        self.text = text
+    ## Returns a formatted string. Looks nice. Looks like a nice boy to bring home to daddy.
+    def displayString(self, idx):
+        return "{0:02}: {1}".format(idx, self._text)
     
-    ## Display the note as a line in the console, formatted
-    def display(self, idx):
-        print("{0:02}: {1}".format(idx, self.text))
-    
+    ## Returns the note's string as a string, baby.
+    def getContent(self):
+        return self._text
+
+    ## Sets the note's string to anything.
+    def setContent(self, text):
+        self._text = text
+
     ## Returns True if this object is worth keeping
     def valid(self):
-        return True if self.text != "" else False
+        return (self._text != "")
+        ## confirm with account manager that accountID is valid
