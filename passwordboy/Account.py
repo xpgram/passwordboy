@@ -1,3 +1,8 @@
+
+## Represents an account on a web-service.
+## Keeps track of logins, a list of associated login passwords, security questions, notes, and whether
+## the account is still active.
+
 class Account:
     login = ""
     passwords = []
@@ -22,25 +27,32 @@ class Account:
         ## Program will have to build in memory all the info to write down
         ## Ex:
         ## [Domains]
-        ## 1 Netflix
+        ## 1 Netflix                    Id    DomainName
         ## 2 Yahoo
         ## 3 Steam
         ## ...
         ## [Accounts]
-        ## 1 4 1 xpgram 1           Domain-Code Account-Code Active-Flag login (Optional)Primary-Account-Flag
+        ## 1 4 1 xpgram                 Id    Domain#    Active-Flag    Login
         ## 2 6 0 gippendo
-        ## 2 5 1 glipperdio 1
+        ## 2 5 1 glipperdio
         ## 2 2 0 GelatinBath
         ## ...
         ## [Passwords]
-        ## 4 1 g_cesp5BAKka         Account-Code Password-Archive-Order Password
+        ## 4 g_cesp5BAKka               Id    Password    Shortcut
         ## ...
         ## [SecQ]
-        ## 4 "What was your \"Mr Perfect\" blah blah you know.?" "Answer"   Account-Code Question Answer
+        ## 4 1 "What was?" "Answer"     Account#    Order#    Question    Answer
         ## ...
         ## [Notes]
-        ## 4 All of this is just whatever the note was. These should be saved in order, so they should be read in order, but I'm not making particular efforts to maintain order...
-        ## 
+        ## 4 1 "This is a note ab..."   Account#    Order#    Note
+        ## ...
+        ## [Primary Accounts]
+        ## 3 1                          Domain#    Account#
+        ## ...
+        ## [Account Passwords]
+        ## 4 1 1                        Password#    Account#    Order#
+        ## ...
+        ##
         
         
         ## Besides writing the above example, I was just checking this class for format.
@@ -54,7 +66,8 @@ class Account:
     
     ##
     def load(self):
-    
+        pass
+        
     ##
     def clean(self):
         self.passwords = Tools.cullList(self.passwords)
