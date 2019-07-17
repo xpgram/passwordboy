@@ -760,6 +760,20 @@ if len(sys.argv) > 1:
                 print ("Label could not be found.")
         else:
             fail()
+
+    elif scriptCommand() == "search":       ## Print all accounts with details matching the search string.
+        if enforceArgLen(3):
+            foundAny = False
+            for domain in program.accounts:
+                for i in range(0, len(domain.logins)):
+                    if (domain.logins[i].find(scriptSubject()) != -1 or
+                        domain.passwords[i].find(scriptSubject()) != -1):
+                        print("{0:27} {1:26} {2}".format(domain.domain, domain.logins[i], domain.passwords[i]))
+                        foundAny = True
+            if not foundAny:
+                print("Could not find '" + scriptSubject() + "' anywhere in the account database.")
+        else:
+            fail()
     
     elif scriptCommand() == "help":         ## Prints helpful information about how to use the program.
         def show(cmd, form, txt):
@@ -768,6 +782,7 @@ if len(sys.argv) > 1:
         show("add", "[domain] [newacc] [newpass]", "Adds the account to memory.")
         show("del", "[domain] or [domain] [login]", "Removes the account from memory.")
         show("display", "[domain] or standalone", "Displays all information for a domain, or lists all domains.")
+        show("search", "[term]", "Display all login and password combinations which match a given substring.")
         show("chpass", "[domain] [login] [newpass]", "Changes an account's password to something else.")
         show("chlogin", "[domain] [login] [newlogin]", "Changes an account's login-name to something else.")
         show("notes", "[domain]", "Displays all notes for a given domain.")
